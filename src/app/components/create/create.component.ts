@@ -29,7 +29,7 @@ export class CreateComponent implements OnInit {
 
   ) { 
   	this.title= "crear un nuevo cliente";
-  	this.cliente = new Cliente('','',0,'','','','','',0,'','','',''); 
+  	this.cliente = new Cliente('','','','',0,'','',''); 
   }
 
   ngOnInit() {

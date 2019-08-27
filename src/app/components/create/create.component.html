@@ -10,60 +10,25 @@
 	</div>
 
 	<form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
-
-		  <div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="tipoIdentificacion">Tipo de identificacion</label>
-		      <select class="form-control" name="tipoIdentificacion">
-		      	<option value="RC">RC</option>
-		      	<option value="CC">CC</option>
-		      	<option value="TI">TI</option>
-		      </select>
-		    </div>
-
-		    <div class="form-group col-md-6">
-		      <label for="identificacion">Nº identificacion <span class="asterisco">(*)</span></label>
-		      <input type="number" class="form-control" id="identificacion" name="identificacion"[(ngModel)]="cliente.identificacion"  minlength="8" required #identificacion="ngModel">
-
-		      <div *ngIf=identificacion.errors?.required>
-			  		la identificacion es obligatoria
-			  </div>
-			  <div *ngIf=identificacion.errors?.minlength>
-			  		La identificacion debe tener por lo menos 8 caracteres
-			  </div>
-		    </div>
-
-		  </div>
 	
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <label for="primerNombre">Primer Nombre <span class="asterisco">(*)</span></label>
-		      <input type="text" class="form-control" id="primerNombre"  name="primerNombre" #primerNombre="ngModel" [(ngModel)]="cliente.primerNombre" required>
-			    <span *ngIf="primerNombre.touched && !primerNombre.valid"class="alert alert-danger">
-			  	El primer nombre es obligatorio
+		      <label for="nombre"> Nombre <span class="asterisco">(*)</span></label>
+		      <input type="text" class="form-control" id="nombre"  name="nombre" #nombre="ngModel" [(ngModel)]="cliente.nombre" required>
+			    <span *ngIf="nombre.touched && !nombre.valid"class="alert alert-danger">
+			  	El nombre es obligatorio
 			  	</span>
 		    </div>
 
 		    <div class="form-group col-md-6">
-		      <label for="segundoNombre">Segundo Nombre</label>
-		      <input type="text" class="form-control" id="segundoNombre"  name="segundoNombre" #segundoNombre="ngModel" [(ngModel)]="cliente.segundoNombre">
+		      <label for="apellido">Apellido<span class="asterisco">(*)</span></label>
+		      <input type="text" class="form-control" id="apellido"  name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido" required>
+		       <span *ngIf="apellido.touched && !apellido.valid"class="alert alert-danger">
+			  	El apellido es obligatorio
+			  	</span>
 		    </div>
 		  </div>
 
-		   <div class="form-row">
-		    <div class="form-group col-md-6">
-		      <label for="primerApellido">Primer Apellido <span class="asterisco">(*)</span></label>
-		      <input type="text" class="form-control" id="primerApellido" name="primerApellido" #primerApellido="ngModel" [(ngModel)]="cliente.primerApellido" required>
-		      <span *ngIf="primerApellido.touched && !primerApellido.valid"class="alert alert-danger">
-			  	El primer apellido es obligatorio
-			  </span>
-		    </div>
-		    
-		    <div class="form-group col-md-6">
-		      <label for="segundoApellido">Segundo apellido</label>
-		      <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" #segundoApellido="ngModel" [(ngModel)]="cliente.segundoApellido">
-		    </div>
-		  </div>
 
 		  <div class="form-group">
 		    <label for="direccion">Dirección: </label>
@@ -78,15 +43,10 @@
 		  <div class="form-group">
 		    <label for="Email">Correo electronico: <span class="asterisco">(*)</span></label>
 		    <input type="Email" class="form-control" id="Email" name="Email" #Email="ngModel" 
-		    [(ngModel)]="cliente.Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+		    [(ngModel)]="cliente.Email" required>
 		    <span *ngIf="Email.touched && !Email.valid" class="alert alert-danger">
 		  	El email es obligatorio
 		  	</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="telefono">Ocupacion</label>
-		    <input type="text" class="form-control" id="ocupacion" name="telefono" #ocupacion="ngModel" [(ngModel)]="cliente.ocupacion">
 		  </div>
 
 		  <div class="form-group">
