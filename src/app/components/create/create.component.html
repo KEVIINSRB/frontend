@@ -1,0 +1,115 @@
+<div class="container" *ngIf="cliente">
+	<h2>{{title}}</h2>
+
+	<div  class="alert alert-success" *ngIf="status== 'success'">
+		El cliente se ha creado correctamente, puedes <a [routerLink]="['/cliente', save_cliente._id]">verlo aqui</a>
+	</div>
+
+	<div  class="alert alert-danger" *ngIf="status== 'failed'">
+		El cliente se NO ha creado correctamente
+	</div>
+
+	<form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
+
+		  <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="tipoIdentificacion">Tipo de identificacion</label>
+		      <select class="form-control" name="tipoIdentificacion">
+		      	<option value="RC">RC</option>
+		      	<option value="CC">CC</option>
+		      	<option value="TI">TI</option>
+		      </select>
+		    </div>
+
+		    <div class="form-group col-md-6">
+		      <label for="identificacion">Nº identificacion <span class="asterisco">(*)</span></label>
+		      <input type="number" class="form-control" id="identificacion" name="identificacion"[(ngModel)]="cliente.identificacion"  minlength="8" required #identificacion="ngModel">
+
+		      <div *ngIf=identificacion.errors?.required>
+			  		la identificacion es obligatoria
+			  </div>
+			  <div *ngIf=identificacion.errors?.minlength>
+			  		La identificacion debe tener por lo menos 8 caracteres
+			  </div>
+		    </div>
+
+		  </div>
+	
+		  <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="primerNombre">Primer Nombre <span class="asterisco">(*)</span></label>
+		      <input type="text" class="form-control" id="primerNombre"  name="primerNombre" #primerNombre="ngModel" [(ngModel)]="cliente.primerNombre" required>
+			    <span *ngIf="primerNombre.touched && !primerNombre.valid"class="alert alert-danger">
+			  	El primer nombre es obligatorio
+			  	</span>
+		    </div>
+
+		    <div class="form-group col-md-6">
+		      <label for="segundoNombre">Segundo Nombre</label>
+		      <input type="text" class="form-control" id="segundoNombre"  name="segundoNombre" #segundoNombre="ngModel" [(ngModel)]="cliente.segundoNombre">
+		    </div>
+		  </div>
+
+		   <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="primerApellido">Primer Apellido <span class="asterisco">(*)</span></label>
+		      <input type="text" class="form-control" id="primerApellido" name="primerApellido" #primerApellido="ngModel" [(ngModel)]="cliente.primerApellido" required>
+		      <span *ngIf="primerApellido.touched && !primerApellido.valid"class="alert alert-danger">
+			  	El primer apellido es obligatorio
+			  </span>
+		    </div>
+		    
+		    <div class="form-group col-md-6">
+		      <label for="segundoApellido">Segundo apellido</label>
+		      <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" #segundoApellido="ngModel" [(ngModel)]="cliente.segundoApellido">
+		    </div>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="direccion">Dirección: </label>
+		    <input type="text" class="form-control" id="direccion" name="direccion" #direccion="ngModel" [(ngModel)]="cliente.direccion" >
+		  </div>
+
+		  <div class="form-group">
+		    <label for="telefono">Telefono:</label>
+		    <input type="number" class="form-control" id="telefono" name="telefono" #telefono="ngModel" [(ngModel)]="cliente.telefono">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="Email">Correo electronico: <span class="asterisco">(*)</span></label>
+		    <input type="Email" class="form-control" id="Email" name="Email" #Email="ngModel" 
+		    [(ngModel)]="cliente.Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+		    <span *ngIf="Email.touched && !Email.valid" class="alert alert-danger">
+		  	El email es obligatorio
+		  	</span>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="telefono">Ocupacion</label>
+		    <input type="text" class="form-control" id="ocupacion" name="telefono" #ocupacion="ngModel" [(ngModel)]="cliente.ocupacion">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="direccion">Fecha de nacimiento: <span class="asterisco">(*)</span></label>
+		    <input type="date" class="form-control" id="direccion" name="fechaNacimiento" #fechaNacimiento="ngModel" [(ngModel)]="cliente.fechaNacimiento" required>
+			  <span *ngIf="fechaNacimiento.touched && !fechaNacimiento.valid" class="alert alert-danger">
+			  	La fecha de nacimiento es obligatoria
+			  	</span>
+		  </div>
+
+		<div class="form-group">
+		    <label for="image">Imagen: </label>
+		    <div class="col-md-4" *ngIf="cliente.image"> 
+				<img src="{{url+'get-image/'+ cliente.image }}" class="card-img-top" *ngIf="cliente.image" style="max-height: 500px;">
+			</div>
+			<br>
+		    <input type="file" class="form-control" id="image" name="image" (change)="fileChangeEvent($event)">
+		</div>
+
+		<p>Todos los campos con <span class="asterisco">(*)</span> son obligatorios para poder continuar.</p>
+
+		  <input type="submit" class="btn btn-primary" value="Enviar" [disabled]="!clienteForm.form.valid">
+		</form>
+
+		<br><br><br><br>
+</div>

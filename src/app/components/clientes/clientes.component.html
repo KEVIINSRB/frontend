@@ -1,0 +1,20 @@
+<div class="container">
+	<h2>Listado de clientes</h2>
+	<br>
+	<div class="row">
+		<div *ngFor="let cliente of clientes">
+			<a [routerLink]="['/cliente', cliente._id]">
+				<div class="card" style="width: 22rem;margin-left: 20px;margin-bottom: 40px;">
+				  <img src="{{url+'get-image/'+ cliente.image }}" class="card-img-top" *ngIf="cliente.image" style="max-height:260px; ">
+				  <img src="../../../assets/img/cliente.jpg" class="card-img-top" *ngIf="!cliente.image" style="max-height:260px; height: 260px;">
+				  <div class="card-body">
+				    <h5 class="card-title"><u> Datos del cliente</u> </h5>
+				    <p class="card-text"> <strong> Nombre:</strong> {{cliente.primerNombre }}  {{cliente.primerApellido}}</p>
+				    <p class="card-text"><strong> Correo: </strong>{{cliente.Email}}</p>
+				    <p class="card-text"><strong> Celular: </strong>{{cliente.telefono}}</p>
+				  </div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
